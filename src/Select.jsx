@@ -1091,7 +1091,7 @@ export default class Select extends React.Component {
   };
 
   renderTopControlNode = () => {
-    const { value, open, inputValue } = this.state;
+    const { value, open } = this.state;
     const props = this.props;
     const {
       choiceTransitionName,
@@ -1107,15 +1107,12 @@ export default class Select extends React.Component {
     if (isSingleMode(props)) {
       let selectedValue = null;
       if (value.length) {
-        let showSelectedValue = true;
+        const showSelectedValue = true;
         let opacity = 1;
 
         // 有值就显示，无论是否是有输入内容，因为输入框位置变了
         if (open) {
-          showSelectedValue = !inputValue;
-          if (showSelectedValue) {
-            opacity = 0.4;
-          }
+          opacity = 0.4;
         }
 
         const singleValue = value[0];
