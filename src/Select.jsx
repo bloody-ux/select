@@ -64,6 +64,7 @@ export default class Select extends React.Component {
     onSearch: noop,
     onDeselect: noop,
     onInputKeyDown: noop,
+    onOpenChange: noop,
     showArrow: true,
     dropdownMatchSelectWidth: true,
     dropdownStyle: {},
@@ -554,9 +555,10 @@ export default class Select extends React.Component {
   getPlaceholderElement = () => {
     const { props, state } = this;
     let hidden = false;
-    if (state.inputValue) {
-      hidden = true;
-    }
+    // 由于input value和placeholder是放在不同位置了，所以不进行相互影响
+    // if (state.inputValue) {
+    //   hidden = true;
+    // }
     if (state.value.length) {
       hidden = true;
     }
@@ -656,6 +658,10 @@ export default class Select extends React.Component {
         this.maybeFocus(open, needFocus);
       }
     });
+
+    if (this.props.onOpenChange) {
+      this.props.onOpenChange(open);
+    }
   };
 
   setInputValue = (inputValue, fireSearch = true) => {
@@ -1101,20 +1107,17 @@ export default class Select extends React.Component {
     if (isSingleMode(props)) {
       let selectedValue = null;
       if (value.length) {
-        let showSelectedValue = false;
+        let showSelectedValue = true;
         let opacity = 1;
-        if (!showSearch) {
-          showSelectedValue = true;
-        } else {
-          if (open) {
-            showSelectedValue = !inputValue;
-            if (showSelectedValue) {
-              opacity = 0.4;
-            }
-          } else {
-            showSelectedValue = true;
+
+        // 有值就显示，无论是否是有输入内容，因为输入框位置变了
+        if (open) {
+          showSelectedValue = !inputValue;
+          if (showSelectedValue) {
+            opacity = 0.4;
           }
         }
+
         const singleValue = value[0];
         selectedValue = (
           <div
@@ -1138,9 +1141,6 @@ export default class Select extends React.Component {
           <div
             className={`${prefixCls}-search ${prefixCls}-search--inline`}
             key="input"
-            style={{
-              display: open ? 'block' : 'none',
-            }}
           >
             {this.getInputElement()}
           </div>,
