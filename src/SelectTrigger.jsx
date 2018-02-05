@@ -11,7 +11,7 @@ Trigger.displayName = 'Trigger';
 const BUILT_IN_PLACEMENTS = {
   bottomLeft: {
     points: ['tl', 'bl'],
-    offset: [0, 4],
+    offset: [0, 10],
     overflow: {
       adjustX: 0,
       adjustY: 1,
@@ -19,7 +19,7 @@ const BUILT_IN_PLACEMENTS = {
   },
   topLeft: {
     points: ['bl', 'tl'],
-    offset: [0, -4],
+    offset: [0, -10],
     overflow: {
       adjustX: 0,
       adjustY: 1,
