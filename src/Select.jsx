@@ -47,11 +47,19 @@ function chaining(...fns) {
 }
 
 function highlightKeyword(str, keyword, prefixCls) {
-  return str.split(new RegExp(keyword, 'i'))
-    .map((node, index) => index === 0 ? node : [
-      <span className={`${prefixCls}-dropdown-menu-item-keyword`} key="seperator">{keyword}</span>,
-      node,
-    ]);
+  let idx = 0;
+  const result = [];
+  str.replace(new RegExp(keyword, 'ig'), (value, offset) => {
+    result.push(str.substring(idx, offset));
+    result.push(
+      <span className={`${prefixCls}-dropdown-menu-item-keyword`} key="seperator">{value}</span>);
+    idx = offset + value.length;
+  });
+  if (idx < str.length) {
+    result.push(str.substring(idx));
+  }
+
+  return result;
 }
 
 export default class Select extends React.Component {
