@@ -139,16 +139,16 @@ export default class Select extends React.Component {
   }
 
   componentDidUpdate() {
-    if (isMultipleOrTags(this.props)) {
-      const inputNode = this.getInputDOMNode();
-      const mirrorNode = this.getInputMirrorDOMNode();
-      if (inputNode.value) {
-        inputNode.style.width = '';
-        inputNode.style.width = `${mirrorNode.clientWidth}px`;
-      } else {
-        inputNode.style.width = '';
-      }
-    }
+    // if (isMultipleOrTags(this.props)) {
+    //   const inputNode = this.getInputDOMNode();
+    //   const mirrorNode = this.getInputMirrorDOMNode();
+    //   if (inputNode.value) {
+    //     inputNode.style.width = '';
+    //     inputNode.style.width = `${mirrorNode.clientWidth}px`;
+    //   } else {
+    //     inputNode.style.width = '';
+    //   }
+    // }
   }
 
   componentWillUnmount() {
