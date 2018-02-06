@@ -1037,7 +1037,7 @@ export default class Select extends React.Component {
   renderFilterOptionsFromChildren = (children, childrenKeys, menuItems) => {
     const sel = [];
     const props = this.props;
-    const { inputValue, lighlightSearch } = this.state;
+    const { inputValue } = this.state;
     const tags = props.tags;
     React.Children.forEach(children, child => {
       if (!child) {
@@ -1080,7 +1080,7 @@ export default class Select extends React.Component {
 
       if (this.filterOption(inputValue, child)) {
         let subchildren = child.props.children;
-        if (lighlightSearch && inputValue) {
+        if (props.lighlightSearch && inputValue) {
           subchildren = highlightKeyword(subchildren, inputValue, props.prefixCls);
         }
 
