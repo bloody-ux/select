@@ -52,7 +52,7 @@ function highlightKeyword(str, keyword, prefixCls) {
   str.replace(new RegExp(keyword, 'ig'), (value, offset) => {
     result.push(str.substring(idx, offset));
     result.push(
-      <span className={`${prefixCls}-dropdown-menu-item-keyword`} key="seperator">{value}</span>);
+      <span className={`${prefixCls}-dropdown-menu-item-keyword`} key={offset}>{value}</span>);
     idx = offset + value.length;
   });
   if (idx < str.length) {

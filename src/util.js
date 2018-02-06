@@ -20,7 +20,16 @@ export function getPropValue(child, prop) {
   if (prop === 'value') {
     return getValuePropValue(child);
   }
-  return child.props[prop];
+
+  const result = child.props[prop];
+  if (Array.isArray(result)) {
+    return result.reduce(
+      (p, c) => p + (React.isValidElement(c) ? c.props.children : c), // 一班只会有2级
+      '',
+    );
+  }
+
+  return result;
 }
 
 export function isMultiple(props) {
