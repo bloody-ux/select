@@ -82,7 +82,7 @@ export default class Select extends React.Component {
     notFoundContent: 'Not Found',
     backfill: false,
     showAction: ['click'],
-    lighlightSearch: true,
+    highlightSearch: true,
   };
 
   constructor(props) {
@@ -1080,7 +1080,7 @@ export default class Select extends React.Component {
 
       if (this.filterOption(inputValue, child)) {
         let subchildren = child.props.children;
-        if (props.lighlightSearch && inputValue) {
+        if (props.highlightSearch && inputValue) {
           subchildren = highlightKeyword(subchildren, inputValue, props.prefixCls);
         }
 
