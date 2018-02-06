@@ -46,6 +46,14 @@ function chaining(...fns) {
   };
 }
 
+function highlightKeyword(str, keyword, prefixCls) {
+  return str.split(keyword)
+    .map((node, index) => index === 0 ? node : [
+      <span className={`${prefixCls}-menu-item-keyword`} key="seperator">{keyword}</span>,
+      node,
+    ]);
+}
+
 export default class Select extends React.Component {
   static propTypes = SelectPropTypes;
 
@@ -74,6 +82,7 @@ export default class Select extends React.Component {
     notFoundContent: 'Not Found',
     backfill: false,
     showAction: ['click'],
+    lighlightSearch: true,
   };
 
   constructor(props) {
@@ -1028,7 +1037,7 @@ export default class Select extends React.Component {
   renderFilterOptionsFromChildren = (children, childrenKeys, menuItems) => {
     const sel = [];
     const props = this.props;
-    const { inputValue } = this.state;
+    const { inputValue, lighlightSearch } = this.state;
     const tags = props.tags;
     React.Children.forEach(children, child => {
       if (!child) {
@@ -1070,6 +1079,11 @@ export default class Select extends React.Component {
       validateOptionValue(childValue, this.props);
 
       if (this.filterOption(inputValue, child)) {
+        let children = child.props.children;
+        if (lighlightSearch && inputValue) {
+          children = highlightKeyword(children, inputValue, props.prefixCls);
+        }
+
         const menuItem = (
           <MenuItem
             style={UNSELECTABLE_STYLE}
@@ -1077,6 +1091,7 @@ export default class Select extends React.Component {
             value={childValue}
             key={childValue}
             {...child.props}
+            children={children}
           />
         );
         sel.push(menuItem);

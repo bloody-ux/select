@@ -82,4 +82,5 @@ export const SelectPropTypes = {
   tokenSeparators: PropTypes.arrayOf(PropTypes.string),
   getInputElement: PropTypes.func,
   showAction: PropTypes.arrayOf(PropTypes.string),
+  lighlightSearch: PropTypes.bool,
 };
