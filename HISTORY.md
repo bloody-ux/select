@@ -1,6 +1,10 @@
 # History
 ----
-## 0.0.4 2018-02-07
+
+## 0.0.8 2018-02-07
+- fixed incorrect className for keyword
+
+## 0.0.7 2018-02-07
 - fixed typo
 
 ## 0.0.4 2018-02-06

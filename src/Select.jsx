@@ -49,7 +49,7 @@ function chaining(...fns) {
 function highlightKeyword(str, keyword, prefixCls) {
   return str.split(keyword)
     .map((node, index) => index === 0 ? node : [
-      <span className={`${prefixCls}-menu-item-keyword`} key="seperator">{keyword}</span>,
+      <span className={`${prefixCls}-dropdown-menu-item-keyword`} key="seperator">{keyword}</span>,
       node,
     ]);
 }
