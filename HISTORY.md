@@ -1,6 +1,9 @@
 # History
 ----
 
+## 0.0.9 2018-02-07
+- supported case insensitive highlight 
+
 ## 0.0.8 2018-02-07
 - fixed incorrect className for keyword
 
