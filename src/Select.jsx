@@ -1079,9 +1079,9 @@ export default class Select extends React.Component {
       validateOptionValue(childValue, this.props);
 
       if (this.filterOption(inputValue, child)) {
-        let children = child.props.children;
+        let subchildren = child.props.children;
         if (lighlightSearch && inputValue) {
-          children = highlightKeyword(children, inputValue, props.prefixCls);
+          subchildren = highlightKeyword(subchildren, inputValue, props.prefixCls);
         }
 
         const menuItem = (
@@ -1091,7 +1091,7 @@ export default class Select extends React.Component {
             value={childValue}
             key={childValue}
             {...child.props}
-            children={children}
+            children={subchildren}
           />
         );
         sel.push(menuItem);
