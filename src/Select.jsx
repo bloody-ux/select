@@ -47,6 +47,8 @@ function chaining(...fns) {
 }
 
 function highlightKeyword(str, keyword, prefixCls) {
+  if (typeof str !== 'string') return str;
+
   let idx = 0;
   const result = [];
   str.replace(new RegExp(keyword, 'ig'), (value, offset) => {
