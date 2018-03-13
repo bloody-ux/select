@@ -93,6 +93,7 @@ export default class Select extends React.Component {
     backfill: false,
     showAction: ['click'],
     highlightSearch: true,
+    inputElementPosition: 'inline',
   };
 
   constructor(props) {
@@ -158,16 +159,19 @@ export default class Select extends React.Component {
   }
 
   componentDidUpdate() {
-    // if (isMultipleOrTags(this.props)) {
-    //   const inputNode = this.getInputDOMNode();
-    //   const mirrorNode = this.getInputMirrorDOMNode();
-    //   if (inputNode.value) {
-    //     inputNode.style.width = '';
-    //     inputNode.style.width = `${mirrorNode.clientWidth}px`;
-    //   } else {
-    //     inputNode.style.width = '';
-    //   }
-    // }
+    const { inputElementPosition } = this.props;
+    if (inputElementPosition !== 'inline') return;
+
+    if (isMultipleOrTags(this.props)) {
+      const inputNode = this.getInputDOMNode();
+      const mirrorNode = this.getInputMirrorDOMNode();
+      if (inputNode.value) {
+        inputNode.style.width = '';
+        inputNode.style.width = `${mirrorNode.clientWidth}px`;
+      } else {
+        inputNode.style.width = '';
+      }
+    }
   }
 
   componentWillUnmount() {
@@ -574,10 +578,14 @@ export default class Select extends React.Component {
   getPlaceholderElement = () => {
     const { props, state } = this;
     let hidden = false;
-    // 由于input value和placeholder是放在不同位置了，所以不进行相互影响
-    // if (state.inputValue) {
-    //   hidden = true;
-    // }
+
+    if (props.inputElementPosition === 'inline') {
+      // 非内联方式，由于input value和placeholder是放在不同位置了，所以不进行相互影响
+      if (state.inputValue) {
+        hidden = true;
+      }
+    }
+   
     if (state.value.length) {
       hidden = true;
     }

@@ -83,4 +83,5 @@ export const SelectPropTypes = {
   getInputElement: PropTypes.func,
   showAction: PropTypes.arrayOf(PropTypes.string),
   highlightSearch: PropTypes.bool,
+  inputElementPosition: PropTypes.oneOf(['inline', 'popup']),
 };

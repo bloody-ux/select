@@ -1,6 +1,6 @@
 {
   "name": "rc-select-ex",
-  "version": "0.0.13",
+  "version": "0.0.14",
   "description": "React Select",
   "keywords": [
     "react",
@@ -79,6 +79,5 @@
     "warning": "^3.0.0"
   },
   "pre-commit": [
-    "lint"
   ]
 }
