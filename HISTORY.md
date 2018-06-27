@@ -1,6 +1,9 @@
 # History
 ----
 
+## 0.0.14 2018-06-27
+- fixed keyword is a invalid regexp issue
+
 ## 0.0.13 2018-03-04
 - only highlight string by default 
 ## 0.0.11 2018-02-07
