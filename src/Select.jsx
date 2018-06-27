@@ -8,6 +8,7 @@ import Animate from 'rc-animate';
 import classes from 'component-classes';
 import { Item as MenuItem, ItemGroup as MenuItemGroup } from 'rc-menu';
 import warning from 'warning';
+import escapeStringRegexp from 'escape-string-regexp';
 import Option from './Option';
 
 import {
@@ -51,7 +52,7 @@ function highlightKeyword(str, keyword, prefixCls) {
 
   let idx = 0;
   const result = [];
-  str.replace(new RegExp(keyword, 'ig'), (value, offset) => {
+  str.replace(new RegExp(escapeStringRegexp(keyword), 'ig'), (value, offset) => {
     result.push(str.substring(idx, offset));
     result.push(
       <span className={`${prefixCls}-dropdown-menu-item-keyword`} key={offset}>{value}</span>);

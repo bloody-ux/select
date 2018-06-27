@@ -1,6 +1,6 @@
 {
   "name": "rc-select-ex",
-  "version": "0.0.14",
+  "version": "0.0.15",
   "description": "React Select",
   "keywords": [
     "react",
@@ -71,6 +71,7 @@
     "classnames": "2.x",
     "component-classes": "1.x",
     "dom-scroll-into-view": "1.x",
+    "escape-string-regexp": "^1.0.5",
     "prop-types": "^15.5.8",
     "rc-animate": "2.x",
     "rc-menu": "^6.1.0",
@@ -78,6 +79,5 @@
     "rc-util": "^4.0.4",
     "warning": "^3.0.0"
   },
-  "pre-commit": [
-  ]
+  "pre-commit": []
 }
