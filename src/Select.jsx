@@ -175,6 +175,8 @@ export default class Select extends React.Component {
         inputNode.style.width = '';
       }
     }
+
+    this.forcePopupAlign();
   }
 
   componentWillUnmount() {
@@ -441,6 +443,13 @@ export default class Select extends React.Component {
   };
 
   onChoiceAnimationLeave = () => {
+    this.forcePopupAlign();
+  };
+
+  forcePopupAlign = () => {
+    if (!this.state.open) {
+      return;
+    }
     this.selectTriggerRef.triggerRef.forcePopupAlign();
   };
 
@@ -702,6 +711,7 @@ export default class Select extends React.Component {
     if (inputValue !== this.state.inputValue) {
       this.setState({
         inputValue,
+        this.forcePopupAlign,
       });
       if (fireSearch) {
         this.props.onSearch(inputValue);
@@ -944,6 +954,7 @@ export default class Select extends React.Component {
     if (!('value' in props)) {
       this.setState({
         value,
+        this.forcePopupAlign,
       });
     }
     const vls = this.getVLForOnChange(value);
