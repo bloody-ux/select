@@ -20,6 +20,7 @@ export default class DropdownMenu extends React.Component {
     menuItems: PropTypes.any,
     inputValue: PropTypes.string,
     visible: PropTypes.bool,
+    didPopupMount: PropTypes.func,
   };
 
   componentWillMount() {
@@ -29,6 +30,10 @@ export default class DropdownMenu extends React.Component {
   componentDidMount() {
     this.scrollActiveItemToView();
     this.lastVisible = this.props.visible;
+
+    if (this.props.didPopupMount) {
+      this.props.didPopupMount(this.menuWrapperRef);
+    }
   }
 
   shouldComponentUpdate(nextProps) {
@@ -137,19 +142,21 @@ export default class DropdownMenu extends React.Component {
       }
 
       return (
-        <Menu
-          ref={saveRef(this, 'menuRef')}
-          style={this.props.dropdownMenuStyle}
-          defaultActiveFirst={defaultActiveFirstOption}
-          {...activeKeyProps}
-          multiple={multiple}
-          focusable={false}
-          {...menuProps}
-          selectedKeys={selectedKeys}
-          prefixCls={`${prefixCls}-menu`}
-        >
-          {clonedMenuItems}
-        </Menu>
+        <div ref={saveRef(this, 'menuWrapperRef')} className={`${prefixCls}-menu-wrapper`}>
+          <Menu
+            ref={saveRef(this, 'menuRef')}
+            style={this.props.dropdownMenuStyle}
+            defaultActiveFirst={defaultActiveFirstOption}
+            {...activeKeyProps}
+            multiple={multiple}
+            focusable={false}
+            {...menuProps}
+            selectedKeys={selectedKeys}
+            prefixCls={`${prefixCls}-menu`}
+          >
+            {clonedMenuItems}
+          </Menu>
+        </div>
       );
     }
     return null;

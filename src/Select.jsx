@@ -127,6 +127,8 @@ export default class Select extends React.Component {
       open,
     };
     this.adjustOpenState();
+
+    this.didPopupShown = false;
   }
 
   componentDidMount() {
@@ -648,6 +650,10 @@ export default class Select extends React.Component {
   };
 
   getInputDOMNode = () => {
+    if (this.shouldMoveInputToPopup()) {
+      return this.inputRef;
+    }
+
     return this.topCtrlRef
       ? this.topCtrlRef.querySelector('input,textarea,div[contentEditable]')
       : this.inputRef;
@@ -682,7 +688,7 @@ export default class Select extends React.Component {
       this.maybeFocus(open, needFocus);
     }
     this.setState(nextState, () => {
-      if (open) {
+      if (open && this.didPopupShown) {
         this.maybeFocus(open, needFocus);
       }
     });
@@ -804,6 +810,39 @@ export default class Select extends React.Component {
     } else {
       classes(rootRef).remove(`${props.prefixCls}-focused`);
     }
+  };
+
+  shouldMoveInputToPopup = () => {
+    const {
+      inputElementPosition,
+      showSearch, 
+    } = this.props;
+
+
+    const multiple = isMultipleOrTags(this.props);
+
+    // 不是新模式，那么就按antd的来
+    if (inputElementPosition !== 'popup') return false;
+
+    // 如果是新模式，并且是多选或者显示搜搜的，那么需要移动到popup
+    if (multiple || showSearch) return true;
+
+    return false;
+  };
+
+  handlePopupMount = (popupRoot) => {
+    this.didPopupShown = true;
+
+    // 只有对于需要移动到popup的情况，才处理
+    if (this.shouldMoveInputToPopup()) {
+      const input = ReactDOM.findDOMNode(this.inputRef)
+      popupRoot.firstChild.insertAdjacentElement('beforebegin', input.parentNode);
+    }
+
+    // 必须做个延迟，否则动画结束前focus会调一下到页面头部
+    setTimeout(() => {
+      this.maybeFocus(this.state.open, true);
+    }, 10);
   };
 
   maybeFocus = (open, needFocus) => {
@@ -1357,6 +1396,7 @@ export default class Select extends React.Component {
         onPopupScroll={props.onPopupScroll}
         showAction={props.showAction}
         ref={saveRef(this, 'selectTriggerRef')}
+        didPopupMount={this.handlePopupMount}
       >
         <div
           style={props.style}

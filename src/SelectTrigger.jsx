@@ -44,6 +44,7 @@ export default class SelectTrigger extends React.Component {
     prefixCls: PropTypes.string,
     popupClassName: PropTypes.string,
     children: PropTypes.any,
+    didPopupMount: PropTypes.func,
     showAction: PropTypes.arrayOf(PropTypes.string),
   };
 
@@ -117,6 +118,7 @@ export default class SelectTrigger extends React.Component {
       dropdownClassName,
       dropdownStyle,
       dropdownMatchSelectWidth,
+      didPopupMount,
     } = props;
     const dropdownPrefixCls = this.getDropdownPrefixCls();
     const popupClassName = {
@@ -129,6 +131,7 @@ export default class SelectTrigger extends React.Component {
       multiple,
       inputValue,
       visible,
+      didPopupMount,
     });
     let hideAction;
     if (disabled) {
