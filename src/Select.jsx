@@ -711,8 +711,7 @@ export default class Select extends React.Component {
     if (inputValue !== this.state.inputValue) {
       this.setState({
         inputValue,
-        this.forcePopupAlign,
-      });
+      }, this.forcePopupAlign);
       if (fireSearch) {
         this.props.onSearch(inputValue);
       }
@@ -954,8 +953,7 @@ export default class Select extends React.Component {
     if (!('value' in props)) {
       this.setState({
         value,
-        this.forcePopupAlign,
-      });
+      }, this.forcePopupAlign);
     }
     const vls = this.getVLForOnChange(value);
     const options = this.getOptionsByValue(value);
