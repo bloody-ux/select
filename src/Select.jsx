@@ -95,6 +95,7 @@ export default class Select extends React.Component {
     showAction: ['click'],
     highlightSearch: true,
     inputElementPosition: 'inline',
+    dropdownRender: menu => menu,
   };
 
   constructor(props) {
@@ -1406,6 +1407,7 @@ export default class Select extends React.Component {
         showAction={props.showAction}
         ref={saveRef(this, 'selectTriggerRef')}
         didPopupMount={this.handlePopupMount}
+        dropdownRender={props.dropdownRender}
       >
         <div
           style={props.style}

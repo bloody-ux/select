@@ -84,4 +84,5 @@ export const SelectPropTypes = {
   showAction: PropTypes.arrayOf(PropTypes.string),
   highlightSearch: PropTypes.bool,
   inputElementPosition: PropTypes.oneOf(['inline', 'popup']),
+  dropdownRender: PropTypes.func,
 };

@@ -46,10 +46,12 @@ export default class SelectTrigger extends React.Component {
     children: PropTypes.any,
     didPopupMount: PropTypes.func,
     showAction: PropTypes.arrayOf(PropTypes.string),
+    dropdownRender: PropTypes.func,
   };
 
   state = {
     dropdownWidth: null,
+    dropdownRender: menu => menu,
   }
 
   componentDidMount() {
@@ -77,7 +79,8 @@ export default class SelectTrigger extends React.Component {
 
   getDropdownElement = newProps => {
     const props = this.props;
-    return (
+    const { dropdownRender } = this.props;
+    const menuNode = (
       <DropdownMenu
         ref={saveRef(this, 'dropdownMenuRef')}
         {...newProps}
@@ -91,6 +94,11 @@ export default class SelectTrigger extends React.Component {
         dropdownMenuStyle={props.dropdownMenuStyle}
       />
     );
+
+    if (dropdownRender) {
+      return dropdownRender(menuNode, props);
+    }
+    return null;
   };
 
   getDropdownTransitionName = () => {
